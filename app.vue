@@ -12,7 +12,28 @@ import gsap from "gsap";
 import Lenis from "@studio-freight/lenis";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRoute } from "vue-router";
-gsap.registerPlugin(ScrollTrigger);
+if (process.client) {
+  gsap.registerPlugin(ScrollTrigger);
+
+  onMounted(() => {
+    const lenis = new Lenis({
+      smooth: true,
+    });
+
+    lenis.on("scroll", ScrollTrigger.update);
+
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+  });
+}
 //#TODO add image moving animation to the the second section
 
 // useHead({
