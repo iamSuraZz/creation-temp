@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   css: ["~/assets/css/main.css", "~/assets/css/fonts/fonts.css"],
   modules: ["@nuxt/image", "nuxt-simple-sitemap"],
-  ssr: false,
+  ssr: true,
   app: {
     head: {
       title: "Creation Furnishings | Premium Curtains & Upholstery in India",
